@@ -101,3 +101,30 @@ function get_source_paths() {
         fi
     done
 }
+
+
+# find links from a provided path
+function find_links() {
+    local -n links=${1}
+    local path="${2}"
+    # resolve provided path
+    path=$(resolve_path "${path}")
+    # check if provided path exists
+    if [[ -e "${path}" ]]; then
+        # check if symlink if the provided path is a file
+        if [[ -f "${path}" ]] && [[ -L "${path}" ]]; then
+            # add to array
+            links+=("${path}")
+        # iterate through directory and add links to array
+        elif [[ -d "${path}" ]]; then
+            # iterate through all files in the directory
+            for file in "${path}"/*; do
+                # check if file is a symlink
+                if [[ -L "${file}" ]]; then
+                    # add to array
+                    links+=("${file}")
+                fi
+            done
+        fi
+    fi
+}
