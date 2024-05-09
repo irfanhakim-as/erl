@@ -51,13 +51,12 @@ function resolve_path() {
 
 # get relative path between two absolute (destination, source) paths
 function get_relative_path() {
-    # if the destination path does not exist, assume it's a file and that the parent directory exists
-    if [[ ! -e "${1}" ]]; then
-        destination=$(dirname "${1}")
-    else
-        destination="${1}"
+    local destination="${1}"
+    local source="${2}"
+    # if the destination is not a dir, get the parent dir otherwise the relative path will be one level deeper
+    if [[ ! -d "${1}" ]]; then
+        destination=$(dirname "${destination}")
     fi
-    source="${2}"
     REALPATH_CMD=$(get_realpath_cmd)
     echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
 }
