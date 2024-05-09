@@ -122,16 +122,20 @@ function find_links() {
     if [[ -e "${path}" ]]; then
         # check if symlink if the provided path is a file
         if [[ -f "${path}" ]] && [[ -L "${path}" ]]; then
-            # add to array
-            links+=("${path}")
+            link_file="${path}"
+            target_file=$(readlink -f "${link_file}")
+            # add to associative array
+            links["${link_file}"]="${target_file}"
         # iterate through directory and add links to array
         elif [[ -d "${path}" ]]; then
             # iterate through all files in the directory
             for file in "${path}"/*; do
                 # check if file is a symlink
                 if [[ -L "${file}" ]]; then
-                    # add to array
-                    links+=("${file}")
+                    link_file="${file}"
+                    target_file=$(readlink -f "${link_file}")
+                    # add to associative array
+                    links["${link_file}"]="${target_file}"
                 fi
             done
         fi
