@@ -59,7 +59,7 @@ function get_relative_path() {
     fi
     source="${2}"
     REALPATH_CMD=$(get_realpath_cmd)
-    echo $(${REALPATH_CMD} --relative-to="${destination}" "${source}" 2>/dev/null)
+    echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
 }
 
 
