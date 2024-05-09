@@ -43,8 +43,9 @@ function get_realpath_cmd() {
 
 # resolve provided path
 function resolve_path() {
-    local path="${1}"
-    echo $(eval "echo ${path}")
+    local path="${1/#\~/${HOME}}"
+    REALPATH_CMD=$(get_realpath_cmd)
+    echo "$(${REALPATH_CMD} -s "${path}")"
 }
 
 
