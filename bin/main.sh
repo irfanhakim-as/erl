@@ -28,6 +28,7 @@ function print_help() {
     echo "Usage: ${0} [OPTIONS]"; echo
     echo "OPTIONS:"
     echo "  -c, --create            Create relative link."
+    echo "  -u, --update            Update links to relative paths."
     echo "  -h, --help              Show this help message."; echo
     echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
 }
