@@ -70,6 +70,48 @@ function create_relative_link() {
 }
 
 
+# update links to relative paths
+function update_links() {
+    path="${1}"
+
+    # get path if not provided
+    if [[ -z "${path}" ]]; then
+        path=$(get_user_path)
+    fi
+
+    # get all symlinks in the provided directory
+    declare -A symlinks
+    find_links symlinks "${path}"; echo
+
+    # get confirmation from user to proceed with updating found symlinks
+    if [[ ${#symlinks[@]} -gt 0 ]]; then
+        index=0
+        echo "Symlinks:"
+        for key in "${!symlinks[@]}"; do
+            index=$((index+1))
+            link_file="${key}"
+            target_file="${symlinks[${key}]}"
+            echo "${index}. ${link_file} -> ${target_file}"
+        done
+        echo; read -p "Proceed to update the links? [y/N]: " -n 1 -r
+        if [[ ! ${REPLY} =~ ^[Yy]$ ]]; then
+            exit 1
+        fi
+        echo; echo
+
+        # link each symlink relatively
+        for key in "${!symlinks[@]}"; do
+            link_file="${key}"
+            target_file="${symlinks[${key}]}"
+            # if link file and target file exists
+            if [[ -e "${link_file}" ]] && [[ -e "${target_file}" ]]; then
+                link_path "${target_file}" "${link_file}"
+            fi
+        done
+    fi
+}
+
+
 # ================= DO NOT EDIT BEYOND THIS LINE =================
 
 # get arguments
@@ -77,6 +119,11 @@ while [[ ${#} -gt 0 ]]; do
     case "${1}" in
         -c|--create)
             create_relative_link
+            status="${?}"
+            shift
+            ;;
+        -u|--update)
+            update_links "${@:2}"
             status="${?}"
             shift
             ;;
