@@ -37,7 +37,7 @@ function print_help() {
 function create_relative_link() {
     # get destination path
     # destination_path=$(${SOURCE_DIR}/../share/utils.sh --get-destination)
-    destination_path=$(get_destination)
+    destination_path=$(get_user_path "destination path")
     echo "Destination path: ${destination_path}"; echo
 
     # get source paths

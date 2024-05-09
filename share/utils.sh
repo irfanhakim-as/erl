@@ -81,15 +81,16 @@ function link_path() (
 )
 
 
-# get destination absolute path
-function get_destination() {
-    local destination_path
-    while [ -z "${destination_path}" ]; do
-        read -p "Enter destination path: " destination_path
-        # resolve destination path
-        destination_path=$(resolve_path "${destination_path}")
+# get user provided path
+function get_user_path() {
+    local help_message="${1:-"path"}"
+    local path
+    while [ -z "${path}" ]; do
+        read -p "Enter ${help_message}: " path
+        # resolve provided path
+        path=$(resolve_path "${path}")
     done
-    echo "${destination_path}"
+    echo "${path}"
 }
 
 
