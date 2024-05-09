@@ -29,6 +29,18 @@ function print_help() {
 }
 
 
+# get realpath command
+function get_realpath_cmd() {
+    # determine realpath command
+    REALPATH_CMD="realpath"
+    # WARNING: does not work on macOS without coreutils!
+    if [ -x "$(command -v grealpath)" ]; then
+        REALPATH_CMD="grealpath"
+    fi
+    echo "${REALPATH_CMD}"
+}
+
+
 # resolve provided path
 function resolve_path() {
     local path="${1}"
