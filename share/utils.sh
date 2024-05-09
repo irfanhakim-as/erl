@@ -57,12 +57,7 @@ function get_relative_path() {
         destination="${1}"
     fi
     source="${2}"
-    # determine realpath command
-    REALPATH_CMD="realpath"
-    # WARNING: does not work on macOS without coreutils!
-    if [ -x "$(command -v grealpath)" ]; then
-        REALPATH_CMD="grealpath"
-    fi
+    REALPATH_CMD=$(get_realpath_cmd)
     echo $(${REALPATH_CMD} --relative-to="${destination}" "${source}" 2>/dev/null)
 }
 
