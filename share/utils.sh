@@ -140,3 +140,24 @@ function find_links() {
         fi
     fi
 }
+
+
+# update symlink to relative link
+function absolute_to_relative() {
+    # get link path
+    local link_path="${1}"
+    # check if link path is provided
+    if [[ -n "${link_path}" ]]; then
+        # resolve link path
+        link_path=$(resolve_path "${link_path}")
+        # check if provided path is a symlink
+        if [[ -L "${link_path}" ]]; then
+            # get target path
+            local target_path=$(readlink -f "${link_path}")
+            # link relatively if target path exists
+            if [[ -e "${target_path}" ]]; then
+                link_path "${target_path}" "${link_path}"
+            fi
+        fi
+    fi
+}
