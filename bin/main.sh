@@ -27,9 +27,10 @@ source "${SOURCE_DIR}/../share/erl/utils.sh"
 function print_help() {
     echo "Usage: ${0} [OPTIONS]"; echo
     echo "OPTIONS:"
-    echo "  -c, --create            Create relative link."
-    echo "  -u, --update            Update links to relative paths."
-    echo "  -h, --help              Show this help message."; echo
+    echo "  -c, --create                   Create relative link."
+    echo "  -u, --update                   Update links to relative paths."
+    echo "  -h, --help                     Show this help message."
+    echo "  --absolute-to-relative         Update link to relative symlink."; echo
     echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
 }
 
@@ -130,6 +131,11 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         -h|--help)
             print_help
+            status="${?}"
+            shift
+            ;;
+        --absolute-to-relative)
+            absolute_to_relative "${2}"
             status="${?}"
             shift
             ;;
