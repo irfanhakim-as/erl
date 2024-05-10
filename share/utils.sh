@@ -145,19 +145,20 @@ function find_links() {
 # update symlink to relative link
 function absolute_to_relative() {
     # get link path
-    local symlink_path="${1}"
-    # check if link path is provided
-    if [[ -n "${symlink_path}" ]]; then
-        # resolve link path
-        symlink_path=$(resolve_path "${symlink_path}")
-        # check if provided path is a symlink
-        if [[ -L "${symlink_path}" ]]; then
-            # get target path
-            local target_path=$(readlink -f "${symlink_path}")
-            # link relatively if target path exists
-            if [[ -e "${target_path}" ]]; then
-                link_path "${target_path}" "${symlink_path}"
+    for symlink_path in "${@}"; do
+        # check if link path is provided
+        if [[ -n "${symlink_path}" ]]; then
+            # resolve link path
+            symlink_path=$(resolve_path "${symlink_path}")
+            # check if provided path is a symlink
+            if [[ -L "${symlink_path}" ]]; then
+                # get target path
+                local target_path=$(readlink -f "${symlink_path}")
+                # link relatively if target path exists
+                if [[ -e "${target_path}" ]]; then
+                    link_path "${target_path}" "${symlink_path}"
+                fi
             fi
         fi
-    fi
+    done
 }

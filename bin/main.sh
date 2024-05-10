@@ -135,7 +135,7 @@ while [[ ${#} -gt 0 ]]; do
             shift
             ;;
         --absolute-to-relative)
-            absolute_to_relative "${2}"
+            absolute_to_relative "${@:2}"
             status="${?}"
             shift
             ;;
