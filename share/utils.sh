@@ -63,7 +63,7 @@ function get_relative_path() {
 
 
 # link source path (relatively) to destination path
-function link_path() (
+function link_relative_path() (
     local source_path="${1}"
     local destination_path="${2}"
 
@@ -156,7 +156,7 @@ function absolute_to_relative() {
                 local target_path=$(readlink -f "${symlink_path}")
                 # link relatively if target path exists
                 if [[ -e "${target_path}" ]]; then
-                    link_path "${target_path}" "${symlink_path}"
+                    link_relative_path "${target_path}" "${symlink_path}"
                 fi
             fi
         fi

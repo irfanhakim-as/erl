@@ -65,7 +65,7 @@ function create_relative_link() {
     # link each source path to destination path
     if [[ -n "${destination_path}" ]] && [[ -n "${source_paths}" ]]; then
         for source_path in "${source_paths[@]}"; do
-            link_path "${source_path}" "${destination_path}"
+            link_relative_path "${source_path}" "${destination_path}"
         done
         # echo; echo "Done"
     fi
@@ -107,7 +107,7 @@ function update_links() {
             target_file="${symlinks[${key}]}"
             # if link file and target file exists
             if [[ -e "${link_file}" ]] && [[ -e "${target_file}" ]]; then
-                link_path "${target_file}" "${link_file}"
+                link_relative_path "${target_file}" "${link_file}"
             fi
         done
     fi
