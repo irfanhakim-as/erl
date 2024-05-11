@@ -62,7 +62,7 @@ function get_relative_path() {
 }
 
 
-# link source path (relatively if possible) to absolute (destination) path
+# link source path (relatively) to destination path
 function link_path() (
     local source_path="${1}"
     local destination_path="${2}"
