@@ -39,8 +39,11 @@ function get_relative_path() {
     if [[ ! -d "${1}" ]]; then
         destination=$(dirname "${destination}")
     fi
-    REALPATH_CMD=$(get_realpath_cmd)
-    echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
+    # return relative path only if both destination and source exist
+    if [[ -e "${destination}" ]] && [[ -e "${source}" ]]; then
+        REALPATH_CMD=$(get_realpath_cmd)
+        echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
+    fi
 }
 
 
