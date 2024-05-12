@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 
-# constants
-APP_NAME="erl"
-APP_NAMESPACE="erl"
+# source project metadata
+source "./share/md.sh"
 
 
 # print help message
@@ -70,11 +69,12 @@ INSTALL_PFX=$(realpath "${INSTALL_PFX}") || exit 1
 
 # associative array of required files and their target locations
 declare -A required_files=(
-    ["bin/main.sh"]="${INSTALL_PFX}/bin/${APP_NAME}"
-    ["share/utils.sh"]="${INSTALL_PFX}/share/${APP_NAMESPACE}/"
-    ["share/opts.sh"]="${INSTALL_PFX}/share/${APP_NAMESPACE}/"
-    # ["log/${APP_NAME}.log"]="${INSTALL_PFX}/share/${APP_NAMESPACE}/log/"
-    # ["config/${APP_NAME}.json"]="${CONFIG_PFX}/${APP_NAMESPACE}/"
+    ["share/md.sh"]="${INSTALL_PFX}/share/${__namespace__}/"
+    ["bin/main.sh"]="${INSTALL_PFX}/bin/${__name__}"
+    ["share/utils.sh"]="${INSTALL_PFX}/share/${__namespace__}/"
+    ["share/opts.sh"]="${INSTALL_PFX}/share/${__namespace__}/"
+    # ["log/${__name__}.log"]="${INSTALL_PFX}/share/${__namespace__}/log/"
+    # ["config/${__name__}.json"]="${CONFIG_PFX}/${__namespace__}/"
 )
 
 
@@ -90,7 +90,7 @@ done
 
 # install script
 function install() {
-    echo "Installing ${APP_NAME} to ${INSTALL_PFX}"
+    echo "Installing ${__name__} to ${INSTALL_PFX}"
     # create required directories
     for dir in "${required_directories[@]}"; do
         echo "Creating directory ${dir}"
@@ -111,7 +111,7 @@ function install() {
 
 # uninstall script
 function uninstall() {
-    echo "Uninstalling ${APP_NAME} from ${INSTALL_PFX}"
+    echo "Uninstalling ${__name__} from ${INSTALL_PFX}"
     # remove target locations
     for file in "${!required_files[@]}"; do
         echo "Removing ${required_files[${file}]}"
