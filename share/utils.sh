@@ -86,10 +86,10 @@ function get_source_paths() {
         if [[ -z "${path}" ]]; then
             break
         fi
-        source_path=$(resolve_path "${source_path}")
-        # add to array if source path value is not empty and it exists
-        if [[ -n "${source_path}" ]] && [[ -e "${source_path}" ]]; then
-            paths+=("${source_path}")
+        path=$(resolve_path "${path}")
+        # add to array if path value is not empty
+        if [[ -n "${path}" ]]; then
+            paths+=("${path}")
         fi
     done
     echo "${paths[@]}"
