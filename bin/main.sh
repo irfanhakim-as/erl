@@ -66,7 +66,6 @@ function create_relative_link() {
         for source_path in "${source_paths[@]}"; do
             link_relative_path "${source_path}" "${destination_path}"
         done
-        # echo; echo "Done"
     fi
 }
 
