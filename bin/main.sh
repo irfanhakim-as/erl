@@ -121,6 +121,11 @@ while [[ ${#} -gt 0 ]]; do
             status="${?}"
             shift
             ;;
+        -v|--version)
+            echo "${__version__}"
+            status="${?}"
+            shift
+            ;;
         -h|--help)
             help
             status="${?}"
