@@ -53,9 +53,7 @@ function link_relative_path() (
     local destination_path="${2}"
 
     # get relative path between destination and source
-    if [[ -e "${source_path}" ]]; then
-        relative_path=$(get_relative_path "${destination_path}" "${source_path}")
-    fi
+    relative_path=$(get_relative_path "${destination_path}" "${source_path}")
 
     # if relative path isn't empty
     if [[ -n "${relative_path}" ]]; then
