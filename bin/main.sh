@@ -43,10 +43,8 @@ function create_relative_link() {
     destination_path=$(get_user_path "destination path")
     echo "Destination path: ${destination_path}"; echo
 
-    # get source paths
-    declare -a source_paths
-    # ${SOURCE_DIR}/../share/utils.sh --get-source-paths source_paths; echo
-    get_source_paths source_paths; echo
+    # get source paths as an array
+    source_paths=($(get_source_paths)); echo
 
     # get confirmation from user to proceed with provided source paths
     if [[ -n "${source_paths}" ]]; then

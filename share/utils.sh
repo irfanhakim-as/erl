@@ -78,7 +78,7 @@ function get_user_path() {
 
 # loop get input as source path, end loop if empty, return all the inputs as an array
 function get_source_paths() {
-    local -n paths=${1}
+    local paths=()
     while true; do
         read -p "Enter source path: " source_path
         if [[ -z "${source_path}" ]]; then
@@ -90,6 +90,7 @@ function get_source_paths() {
             paths+=("${source_path}")
         fi
     done
+    echo "${paths[@]}"
 }
 
 
