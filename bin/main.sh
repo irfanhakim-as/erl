@@ -18,6 +18,7 @@ APP_NAMESPACE="erl"
 # get script source
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
+
 # source shared functions
 source "${SOURCE_DIR}/../share/erl/utils.sh"
 # source "${SOURCE_DIR}/../share/utils.sh"
