@@ -11,24 +11,6 @@
 # erl-utils: Utility functions written for the Easy Relative Linking tool.
 
 
-# constants
-APP_NAMESPACE="erl"
-
-
-# print help message
-function help() {
-    echo "Usage: ${0} [OPTIONS]"; echo
-    echo "OPTIONS:"
-    echo "  --resolve-path <path>                                       Resolve the provided path fully."
-    echo "  --get-relative-path <destination-path> <source-path>        Get the relative path between two paths."
-    echo "  --link-path <source-path> <destination-path>                Create (relative) link between two paths."
-    echo "  --get-destination                                           Get the intended destination path."
-    echo "  --get-source-paths                                          Get the source paths to link."
-    echo "  -h, --help                                                  Show this help message."; echo
-    echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
-}
-
-
 # get realpath command
 function get_realpath_cmd() {
     # determine realpath command
