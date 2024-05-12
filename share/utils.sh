@@ -16,7 +16,7 @@ APP_NAMESPACE="erl"
 
 
 # print help message
-function print_help() {
+function help() {
     echo "Usage: ${0} [OPTIONS]"; echo
     echo "OPTIONS:"
     echo "  --resolve-path <path>                                       Resolve the provided path fully."

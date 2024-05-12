@@ -24,7 +24,7 @@ source "${SOURCE_DIR}/../share/erl/utils.sh"
 
 
 # print help message
-function print_help() {
+function help() {
     echo "Usage: ${0} [OPTIONS]"; echo
     echo "OPTIONS:"
     echo "  -c, --create                   Create relative link."
@@ -130,7 +130,7 @@ while [[ ${#} -gt 0 ]]; do
             shift
             ;;
         -h|--help)
-            print_help
+            help
             status="${?}"
             shift
             ;;
