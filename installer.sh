@@ -72,6 +72,7 @@ INSTALL_PFX=$(realpath "${INSTALL_PFX}") || exit 1
 declare -A required_files=(
     ["bin/main.sh"]="${INSTALL_PFX}/bin/${APP_NAME}"
     ["share/utils.sh"]="${INSTALL_PFX}/share/${APP_NAMESPACE}/"
+    ["share/opts.sh"]="${INSTALL_PFX}/share/${APP_NAMESPACE}/"
     # ["log/${APP_NAME}.log"]="${INSTALL_PFX}/share/${APP_NAMESPACE}/log/"
     # ["config/${APP_NAME}.json"]="${CONFIG_PFX}/${APP_NAMESPACE}/"
 )
