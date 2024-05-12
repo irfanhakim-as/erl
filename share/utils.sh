@@ -65,8 +65,8 @@ function link_relative_path() (
 
 # get user provided path
 function get_user_path() {
-    local help_message="${1:-"path"}"
     local path
+    local help_message="${1:-"path"}"
     while [ -z "${path}" ]; do
         read -p "Enter ${help_message}: " path
         # resolve provided path
