@@ -59,10 +59,7 @@ function create_relative_link() {
             exit 1
         fi
         echo; echo
-    fi
-
-    # link each source path to destination path
-    if [[ -n "${destination_path}" ]] && [[ -n "${source_paths}" ]]; then
+        # link each source path to the destination path
         for source_path in "${source_paths[@]}"; do
             link_relative_path "${source_path}" "${destination_path}"
         done
