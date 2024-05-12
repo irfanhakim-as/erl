@@ -112,7 +112,7 @@ function get_source_paths() {
 
 
 # find links from a provided path
-function find_links() {
+function get_links() {
     local -n links=${1}
     local path="${2}"
     # resolve provided path

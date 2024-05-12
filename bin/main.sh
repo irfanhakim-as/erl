@@ -84,7 +84,7 @@ function update_links() {
 
     # get all symlinks in the provided directory
     declare -A symlinks
-    find_links symlinks "${path}"; echo
+    get_links symlinks "${path}"; echo
 
     # get confirmation from user to proceed with updating found symlinks
     if [[ ${#symlinks[@]} -gt 0 ]]; then

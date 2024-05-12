@@ -59,8 +59,8 @@ while [[ ${#} -gt 0 ]]; do
             status="${?}"
             shift
             ;;
-        --find-links)
-            find_links "${@:2}"
+        --get-links)
+            get_links "${@:2}"
             status="${?}"
             shift
             ;;
