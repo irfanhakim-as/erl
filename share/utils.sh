@@ -77,8 +77,8 @@ function get_user_path() {
 }
 
 
-# loop get input as source path, end loop if empty, return all the inputs as an array
-function get_source_paths() {
+# get array of user provided paths
+function get_user_paths() {
     local paths=()
     local help_message="${1:-"path"}"
     while true; do

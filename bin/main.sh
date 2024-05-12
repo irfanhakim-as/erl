@@ -44,7 +44,7 @@ function create_relative_link() {
     echo "Destination path: ${destination_path}"; echo
 
     # get source paths as an array
-    source_paths=($(get_source_paths)); echo
+    source_paths=($(get_user_paths "source path")); echo
 
     # get confirmation from user to proceed with provided source paths
     if [[ -n "${source_paths}" ]]; then

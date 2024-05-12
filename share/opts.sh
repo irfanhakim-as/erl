@@ -33,7 +33,7 @@ function help() {
     echo "  --get-relative-path <destination-path> <source-path>        Get the relative path between two paths."
     echo "  --link-relative-path <source-path> <destination-path>       Create a relative link between two paths."
     echo "  --get-user-path                                             Get a user provided path interactively."
-    echo "  --get-source-paths                                          Get an array of source paths interactively."
+    echo "  --get-user-paths                                            Get an array of user provided paths interactively."
     echo "  --get-links <path>                                          Return an associative array of links found in a directory."
     echo "  --absolute-to-relative <link-paths>                         Update an existing link to a relative link."; echo
     echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
@@ -75,8 +75,8 @@ while [[ ${#} -gt 0 ]]; do
             status="${?}"
             shift
             ;;
-        --get-source-paths)
-            get_source_paths "${@:2}"
+        --get-user-paths)
+            get_user_paths "${@:2}"
             status="${?}"
             shift
             ;;
