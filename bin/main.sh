@@ -31,7 +31,7 @@ function help() {
     echo "  -c, --create                   Create relative link."
     echo "  -u, --update                   Update links to relative paths."
     echo "  -h, --help                     Show this help message."
-    echo "  --absolute-to-relative         Update link to relative symlink."; echo
+    echo "  --utils                        Call utility functions."; echo
     echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
 }
 
@@ -135,8 +135,8 @@ while [[ ${#} -gt 0 ]]; do
             status="${?}"
             shift
             ;;
-        --absolute-to-relative)
-            absolute_to_relative "${@:2}"
+        --utils)
+            "${SOURCE_DIR}/../share/erl/opts.sh" "${@:2}"
             status="${?}"
             shift
             ;;
