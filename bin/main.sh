@@ -29,7 +29,7 @@ function help() {
     echo "  -u, --update                   Update links to relative paths."
     echo "  -h, --help                     Show this help message."
     echo "  --utils                        Call utility functions."; echo
-    echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
+    echo "Report bugs to ${__source__}/issues"
 }
 
 

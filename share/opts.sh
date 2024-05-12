@@ -33,7 +33,7 @@ function help() {
     echo "  --get-user-paths                                            Get an array of user provided paths interactively."
     echo "  --get-links <path>                                          Return an associative array of links found in a directory."
     echo "  --absolute-to-relative <link-paths>                         Update an existing link to a relative link."; echo
-    echo "Report bugs to https://github.com/irfanhakim-as/${APP_NAMESPACE}/issues"
+    echo "Report bugs to ${__source__}/issues"
 }
 
 
