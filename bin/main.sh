@@ -11,15 +11,12 @@
 # erl: Easy Relative Linking tool written in Bash.
 
 
-# constants
-APP_NAMESPACE="erl"
-
-
 # get script source
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 
-# source shared functions
+# source project files
+source "${SOURCE_DIR}/../share/erl/md.sh"
 source "${SOURCE_DIR}/../share/erl/utils.sh"
 # source "${SOURCE_DIR}/../share/utils.sh"
 

@@ -11,15 +11,12 @@
 # erl-opts: Opts interface for the Utility functions written for the Easy Relative Linking tool.
 
 
-# constants
-APP_NAMESPACE="erl"
-
-
 # get script source
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 
-# source shared functions
+# source project files
+source "${SOURCE_DIR}/md.sh"
 source "${SOURCE_DIR}/utils.sh"
 
 
