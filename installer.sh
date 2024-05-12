@@ -6,7 +6,7 @@ source "./share/md.sh"
 
 
 # print help message
-function print_help() {
+function help() {
     echo "Usage: ${0} [options]"; echo
     echo "OPTIONS:"
     # echo "  -c, --config-prefix <path>           Specify a config prefix"
@@ -44,7 +44,7 @@ while [[ ${#} -gt 0 ]]; do
             UNINSTALL_APP=1
             ;;
         -h|--help)
-            print_help
+            help
             exit 0
             ;;
         *)
