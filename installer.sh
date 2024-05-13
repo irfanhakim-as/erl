@@ -42,7 +42,7 @@ while [[ ${#} -gt 0 ]]; do
         #     ;;
         -i|--install-prefix)
             if [ -z "${2}" ]; then
-                echo "ERROR: Please specify a install prefix"
+                echo "ERROR: Please specify an installation prefix"
                 exit 1
             fi
             INSTALL_PFX="${2}"
