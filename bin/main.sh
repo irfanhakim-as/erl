@@ -25,11 +25,11 @@ source "${SOURCE_DIR}/../share/erl/utils.sh"
 function help() {
     echo "Usage: ${0} [OPTIONS]"; echo
     echo "OPTIONS:"
-    echo "  -c, --create                   Create relative link."
-    echo "  -u, --update                   Update links to relative paths."
-    echo "  -v, --version                  Return the version of the script."
-    echo "  -h, --help                     Show this help message."
-    echo "  --utils                        Call utility functions."; echo
+    echo "  -c, --create        Create relative link"
+    echo "  -u, --update        Update links to relative paths"
+    echo "  -v, --version       Return the version of the script"
+    echo "  -h, --help          Show this help message"
+    echo "  --utils             Call utility functions"; echo
     echo "Report bugs to ${__source__}/issues"
 }
 

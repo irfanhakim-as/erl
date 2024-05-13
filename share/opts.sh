@@ -24,15 +24,15 @@ source "${SOURCE_DIR}/utils.sh"
 function help() {
     echo "Usage: ${0} [OPTIONS]"; echo
     echo "OPTIONS:"
-    echo "  -h, --help                                                  Show this help message."
-    echo "  --get-realpath-cmd                                          Return the system's realpath command."
-    echo "  --resolve-path <path>                                       Resolve the provided path fully."
-    echo "  --get-relative-path <destination-path> <source-path>        Get the relative path between two paths."
-    echo "  --link-relative-path <source-path> <destination-path>       Create a relative link between two paths."
-    echo "  --get-user-path                                             Get a user provided path interactively."
-    echo "  --get-user-paths                                            Get an array of user provided paths interactively."
-    echo "  --get-links <path>                                          Return an associative array of links found in a directory."
-    echo "  --absolute-to-relative <link-paths>                         Update an existing link to a relative link."; echo
+    echo "  -h, --help                                                  Show this help message"
+    echo "  --get-realpath-cmd                                          Return the system's realpath command"
+    echo "  --resolve-path <path>                                       Resolve the provided path fully"
+    echo "  --get-relative-path <destination-path> <source-path>        Get the relative path between two paths"
+    echo "  --link-relative-path <source-path> <destination-path>       Create a relative link between two paths"
+    echo "  --get-user-path                                             Get a user provided path interactively"
+    echo "  --get-user-paths                                            Get an array of user provided paths interactively"
+    echo "  --get-links <path>                                          Return an associative array of links found in a directory"
+    echo "  --absolute-to-relative <link-paths>                         Update an existing link to a relative link"; echo
     echo "Report bugs to ${__source__}/issues"
 }
 
