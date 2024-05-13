@@ -141,6 +141,10 @@ function absolute_to_relative() {
                 local target_path=$(readlink -f "${symlink_path}")
                 # link relatively if target path exists
                 if [[ -e "${target_path}" ]]; then
+                    # if link path is an existing directory, remove it first to replace it
+                    if [[ -d "${symlink_path}" ]]; then
+                        rm -rf "${symlink_path}"
+                    fi
                     link_relative_path "${target_path}" "${symlink_path}"
                 fi
             fi
