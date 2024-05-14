@@ -35,8 +35,8 @@ function resolve_path() {
 
 # get relative path between two absolute (destination, source) paths
 function get_relative_path() {
-    local destination="${1}"
-    local source="${2}"
+    local destination=$(resolve_path "${1}")
+    local source=$(resolve_path "${2}")
     # if the destination is not a dir, get the parent dir otherwise the relative path will be one level deeper
     if [[ ! -d "${1}" ]]; then
         destination=$(dirname "${destination}")
@@ -52,8 +52,8 @@ function get_relative_path() {
 
 # link source path (relatively) to destination path
 function link_relative_path() (
-    local source_path="${1}"
-    local destination_path="${2}"
+    local source_path=$(resolve_path "${1}")
+    local destination_path=$(resolve_path "${2}")
 
     # get relative path between destination and source
     relative_path=$(get_relative_path "${destination_path}" "${source_path}")
