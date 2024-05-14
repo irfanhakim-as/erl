@@ -17,7 +17,6 @@ For the best experience on a **Linux** system running **KDE Plasma**, consider i
 ## Requirements
 
 - `bash` 5.0+
-- `coreutils` 9.0+
 
 ## Installation
 
