@@ -25,32 +25,35 @@ function get_realpath_cmd() {
 
 # resolve provided path
 function resolve_path() {
-    local path="${1/#\~/${HOME}}"
-    REALPATH_CMD=$(get_realpath_cmd)
-    echo "$(${REALPATH_CMD} -s "${path}")"
+    # local path="${1/#\~/${HOME}}"
+    local path="${1}"
+    # REALPATH_CMD=$(get_realpath_cmd)
+    # echo "$(${REALPATH_CMD} -s "${path}")"
+    echo $(python -c "import os.path; print(os.path.abspath(os.path.expanduser(\"${path}\"))) if \"${path}\" else exit()" 2>/dev/null)
 }
 
 
 # get relative path between two absolute (destination, source) paths
 function get_relative_path() {
-    local destination="${1}"
-    local source="${2}"
+    local destination=$(resolve_path "${1}")
+    local source=$(resolve_path "${2}")
     # if the destination is not a dir, get the parent dir otherwise the relative path will be one level deeper
     if [[ ! -d "${1}" ]]; then
         destination=$(dirname "${destination}")
     fi
     # return relative path only if both destination and source exist
     if [[ -e "${destination}" ]] && [[ -e "${source}" ]]; then
-        REALPATH_CMD=$(get_realpath_cmd)
-        echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
+        # REALPATH_CMD=$(get_realpath_cmd)
+        # echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
+        echo $(python -c "import os.path; print(os.path.relpath(\"${source}\", \"${destination}\"))" 2>/dev/null)
     fi
 }
 
 
 # link source path (relatively) to destination path
 function link_relative_path() (
-    local source_path="${1}"
-    local destination_path="${2}"
+    local source_path=$(resolve_path "${1}")
+    local destination_path=$(resolve_path "${2}")
 
     # get relative path between destination and source
     relative_path=$(get_relative_path "${destination_path}" "${source_path}")

@@ -13,7 +13,7 @@
 
 __name__="erl"
 __namespace__="erl"
-__version__="0.1.1"
+__version__="0.1.2"
 __description__="Easy Relative Linking tool written in Bash."
 __author__="Irfan Hakim"
 __author_email__="irfanhakim.as@yahoo.com"
