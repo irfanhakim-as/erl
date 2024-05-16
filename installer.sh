@@ -32,6 +32,13 @@ function help() {
 # install script
 function install() {
     echo "Installing ${__name__} to ${INSTALL_PFX}"
+    # check for required files before proceeding
+    for file in "${!required_files[@]}"; do
+        if [[ ! -f "${file}" ]]; then
+            echo "ERROR: Required file not found (${file})"
+            exit 1
+        fi
+    done
     # create required directories
     for dir in "${required_directories[@]}"; do
         echo "Creating directory ${dir}"
@@ -55,8 +62,10 @@ function uninstall() {
     echo "Uninstalling ${__name__} from ${INSTALL_PFX}"
     # remove target locations
     for file in "${!required_files[@]}"; do
-        echo "Removing ${required_files[${file}]}"
-        rm -f "${required_files[${file}]}" || rm -rf "${required_files[${file}]}"
+        if [[ -e "${required_files[${file}]}" ]]; then
+            echo "Removing ${required_files[${file}]}"
+            rm -f "${required_files[${file}]}" || rm -rf "${required_files[${file}]}"
+        fi
     done
 }
 
