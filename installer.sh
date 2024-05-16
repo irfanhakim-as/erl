@@ -31,7 +31,7 @@ function help() {
 
 # install script
 function install() {
-    echo "Installing ${__name__} to ${INSTALL_PFX}"
+    echo "Installing ${__name__} v${__version__} to ${INSTALL_PFX}"
     # check for required files before proceeding
     for file in "${!required_files[@]}"; do
         if [[ ! -f "${file}" ]]; then
