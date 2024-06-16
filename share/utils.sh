@@ -29,7 +29,7 @@ function resolve_path() {
     local path="${1}"
     # REALPATH_CMD=$(get_realpath_cmd)
     # echo "$(${REALPATH_CMD} -s "${path}")"
-    echo $(python -c "import os.path; print(os.path.abspath(os.path.expanduser(\"${path}\"))) if \"${path}\" else exit()" 2>/dev/null)
+    echo "$(python -c "import os.path; print(os.path.abspath(os.path.expanduser(\"${path}\"))) if \"${path}\" else exit()" 2>/dev/null)"
 }
 
 
@@ -45,7 +45,7 @@ function get_relative_path() {
     if [[ -e "${destination}" ]] && [[ -e "${source}" ]]; then
         # REALPATH_CMD=$(get_realpath_cmd)
         # echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
-        echo $(python -c "import os.path; print(os.path.relpath(\"${source}\", \"${destination}\"))" 2>/dev/null)
+        echo "$(python -c "import os.path; print(os.path.relpath(\"${source}\", \"${destination}\"))" 2>/dev/null)"
     fi
 }
 
