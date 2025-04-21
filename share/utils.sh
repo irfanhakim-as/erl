@@ -166,3 +166,29 @@ function absolute_to_relative() {
         fi
     done
 }
+
+
+# update symlink to absolute link
+function relative_to_absolute() {
+    # get link path
+    for symlink_path in "${@}"; do
+        # check if link path is provided
+        if [[ -n "${symlink_path}" ]]; then
+            # resolve link path
+            symlink_path=$(resolve_path "${symlink_path}")
+            # check if provided path is a symlink
+            if [[ -L "${symlink_path}" ]]; then
+                # get target path
+                local target_path=$(readlink -f "${symlink_path}")
+                # link relatively if target path exists
+                if [[ -e "${target_path}" ]]; then
+                    # if link path is an existing directory, remove it first to replace it
+                    if [[ -d "${symlink_path}" ]]; then
+                        rm -rf "${symlink_path}"
+                    fi
+                    create_symlink "${target_path}" "${symlink_path}"
+                fi
+            fi
+        fi
+    done
+}
