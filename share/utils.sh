@@ -50,6 +50,18 @@ function get_relative_path() {
 }
 
 
+# create symbolic link
+function create_symlink() {
+    local target_path="${1}"
+    local symlink_path="${2}"
+
+    if [[ -n "${target_path}" ]] && [[ -n "${symlink_path}" ]]; then
+        echo "Linking \"${target_path}\" -> \"${symlink_path}\""
+        ln -sf "${target_path}" "${symlink_path}"
+    fi
+}
+
+
 # link source path (relatively) to destination path
 function link_relative_path() (
     local source_path=$(resolve_path "${1}")
