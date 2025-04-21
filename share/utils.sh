@@ -13,6 +13,7 @@
 
 # get realpath command
 function get_realpath_cmd() {
+    local REALPATH_CMD
     # determine realpath command
     REALPATH_CMD="realpath"
     # WARNING: does not work on macOS without coreutils!
@@ -66,6 +67,7 @@ function create_symlink() {
 function link_relative_path() (
     local source_path=$(resolve_path "${1}")
     local destination_path=$(resolve_path "${2}")
+    local relative_path
 
     # get relative path between destination and source
     relative_path=$(get_relative_path "${destination_path}" "${source_path}")
@@ -95,6 +97,7 @@ function get_user_path() {
 
 # get array of user provided paths
 function get_user_paths() {
+    local path
     local paths=()
     local help_message="${1:-"path"}"
     while true; do
@@ -116,6 +119,7 @@ function get_user_paths() {
 function get_links() {
     local -n links=${1}
     local path="${2}"
+    local link_file target_file file
     # resolve provided path
     path=$(resolve_path "${path}")
     # check if provided path exists
@@ -145,6 +149,7 @@ function get_links() {
 
 # update symlink to relative link
 function absolute_to_relative() {
+    local symlink_path
     # get link path
     for symlink_path in "${@}"; do
         # check if link path is provided
@@ -171,6 +176,7 @@ function absolute_to_relative() {
 
 # update symlink to absolute link
 function relative_to_absolute() {
+    local symlink_path
     # get link path
     for symlink_path in "${@}"; do
         # check if link path is provided
