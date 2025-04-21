@@ -38,7 +38,7 @@ function get_relative_path() {
     local destination=$(resolve_path "${1}")
     local source=$(resolve_path "${2}")
     # if the destination is not a dir, get the parent dir otherwise the relative path will be one level deeper
-    if [[ ! -d "${1}" ]]; then
+    if [[ ! -d "${destination}" ]]; then
         destination=$(dirname "${destination}")
     fi
     # return relative path only if both destination and source exist
