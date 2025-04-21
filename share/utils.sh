@@ -13,6 +13,7 @@
 
 # get realpath command
 function get_realpath_cmd() {
+    local REALPATH_CMD
     # determine realpath command
     REALPATH_CMD="realpath"
     # WARNING: does not work on macOS without coreutils!
@@ -25,11 +26,11 @@ function get_realpath_cmd() {
 
 # resolve provided path
 function resolve_path() {
-    # local path="${1/#\~/${HOME}}"
     local path="${1}"
+    # local path="${1/#\~/${HOME}}"
+    echo "$(python -c "import os.path; print(os.path.abspath(os.path.expanduser(\"${path}\"))) if \"${path}\" else exit()" 2>/dev/null)"
     # REALPATH_CMD=$(get_realpath_cmd)
     # echo "$(${REALPATH_CMD} -s "${path}")"
-    echo "$(python -c "import os.path; print(os.path.abspath(os.path.expanduser(\"${path}\"))) if \"${path}\" else exit()" 2>/dev/null)"
 }
 
 
@@ -38,14 +39,26 @@ function get_relative_path() {
     local destination=$(resolve_path "${1}")
     local source=$(resolve_path "${2}")
     # if the destination is not a dir, get the parent dir otherwise the relative path will be one level deeper
-    if [[ ! -d "${1}" ]]; then
+    if [[ ! -d "${destination}" ]]; then
         destination=$(dirname "${destination}")
     fi
     # return relative path only if both destination and source exist
     if [[ -e "${destination}" ]] && [[ -e "${source}" ]]; then
+        echo "$(python -c "import os.path; print(os.path.relpath(\"${source}\", \"${destination}\"))" 2>/dev/null)"
         # REALPATH_CMD=$(get_realpath_cmd)
         # echo $(${REALPATH_CMD} -s --relative-to="${destination}" "${source}" 2>/dev/null)
-        echo "$(python -c "import os.path; print(os.path.relpath(\"${source}\", \"${destination}\"))" 2>/dev/null)"
+    fi
+}
+
+
+# create symbolic link
+function create_symlink() {
+    local target_path="${1}"
+    local symlink_path="${2}"
+
+    if [[ -n "${target_path}" ]] && [[ -n "${symlink_path}" ]]; then
+        echo "Linking \"${target_path}\" -> \"${symlink_path}\""
+        ln -sf "${target_path}" "${symlink_path}"
     fi
 }
 
@@ -54,6 +67,7 @@ function get_relative_path() {
 function link_relative_path() (
     local source_path=$(resolve_path "${1}")
     local destination_path=$(resolve_path "${2}")
+    local relative_path
 
     # get relative path between destination and source
     relative_path=$(get_relative_path "${destination_path}" "${source_path}")
@@ -61,8 +75,9 @@ function link_relative_path() (
     # if relative path isn't empty
     if [[ -n "${relative_path}" ]]; then
         # link source relative to destination
-        echo "Linking \"${relative_path}\" -> \"${destination_path}\""
-        ln -sf "${relative_path}" "${destination_path}"
+        create_symlink "${relative_path}" "${destination_path}"
+        # echo "Linking \"${relative_path}\" -> \"${destination_path}\""
+        # ln -sf "${relative_path}" "${destination_path}"
     fi
 )
 
@@ -82,6 +97,7 @@ function get_user_path() {
 
 # get array of user provided paths
 function get_user_paths() {
+    local path
     local paths=()
     local help_message="${1:-"path"}"
     while true; do
@@ -103,6 +119,7 @@ function get_user_paths() {
 function get_links() {
     local -n links=${1}
     local path="${2}"
+    local link_file target_file file
     # resolve provided path
     path=$(resolve_path "${path}")
     # check if provided path exists
@@ -132,6 +149,7 @@ function get_links() {
 
 # update symlink to relative link
 function absolute_to_relative() {
+    local symlink_path
     # get link path
     for symlink_path in "${@}"; do
         # check if link path is provided
@@ -149,6 +167,33 @@ function absolute_to_relative() {
                         rm -rf "${symlink_path}"
                     fi
                     link_relative_path "${target_path}" "${symlink_path}"
+                fi
+            fi
+        fi
+    done
+}
+
+
+# update symlink to absolute link
+function relative_to_absolute() {
+    local symlink_path
+    # get link path
+    for symlink_path in "${@}"; do
+        # check if link path is provided
+        if [[ -n "${symlink_path}" ]]; then
+            # resolve link path
+            symlink_path=$(resolve_path "${symlink_path}")
+            # check if provided path is a symlink
+            if [[ -L "${symlink_path}" ]]; then
+                # get target path
+                local target_path=$(readlink -f "${symlink_path}")
+                # link relatively if target path exists
+                if [[ -e "${target_path}" ]]; then
+                    # if link path is an existing directory, remove it first to replace it
+                    if [[ -d "${symlink_path}" ]]; then
+                        rm -rf "${symlink_path}"
+                    fi
+                    create_symlink "${target_path}" "${symlink_path}"
                 fi
             fi
         fi
