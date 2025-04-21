@@ -27,11 +27,13 @@ function help() {
     echo "  -h, --help                                                  Show this help message"
     echo "  --resolve-path <path>                                       Resolve the provided path fully"
     echo "  --get-relative-path <destination-path> <source-path>        Get the relative path between two paths"
+    echo "  --create-symlink <target-path> <symlink-path>               Create a symbolic link between two paths"
     echo "  --link-relative-path <source-path> <destination-path>       Create a relative link between two paths"
     echo "  --get-user-path                                             Get a user provided path interactively"
     echo "  --get-user-paths                                            Get an array of user provided paths interactively"
     echo "  --get-links <path>                                          Return an associative array of links found in a directory"
-    echo "  --absolute-to-relative <link-paths>                         Update an existing link to a relative link"; echo
+    echo "  --absolute-to-relative <link-paths>                         Update an existing link to a relative link"
+    echo "  --relative-to-absolute <link-paths>                         Update an existing link to an absolute link"; echo
     echo "Report bugs to ${__source__}/issues"
 }
 
@@ -61,6 +63,11 @@ while [[ ${#} -gt 0 ]]; do
             status="${?}"
             shift
             ;;
+        --create-symlink)
+            create_symlink "${@:2}"
+            status="${?}"
+            shift
+            ;;
         --link-relative-path)
             link_relative_path "${@:2}"
             status="${?}"
@@ -83,6 +90,11 @@ while [[ ${#} -gt 0 ]]; do
             ;;
         --absolute-to-relative)
             absolute_to_relative "${@:2}"
+            status="${?}"
+            shift
+            ;;
+        --relative-to-absolute)
+            relative_to_absolute "${@:2}"
             status="${?}"
             shift
             ;;
