@@ -73,8 +73,9 @@ function link_relative_path() (
     # if relative path isn't empty
     if [[ -n "${relative_path}" ]]; then
         # link source relative to destination
-        echo "Linking \"${relative_path}\" -> \"${destination_path}\""
-        ln -sf "${relative_path}" "${destination_path}"
+        create_symlink "${relative_path}" "${destination_path}"
+        # echo "Linking \"${relative_path}\" -> \"${destination_path}\""
+        # ln -sf "${relative_path}" "${destination_path}"
     fi
 )
 
